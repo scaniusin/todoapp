@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react'
-
+import FilterList from '../FilterList'
 import { Field, reduxForm } from 'redux-form'
 
-const AddTodo = ({ handleSubmit }) => {
+const AddTodo = ({ handleSubmit, listID, filter, changeFilter }) => {
+  console.log(listID);
   return (
     <form className='mw6 center pa4 mb4 br2 ba b--black-10' onSubmit={handleSubmit}>
       <fieldset className='cf bn ma0 pa0'>
@@ -19,11 +20,18 @@ const AddTodo = ({ handleSubmit }) => {
           <button
             className='f6 f5-l button-reset fl pv3 tc bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2 br--right ba b--black-70'
             type='submit'
+            disabled={listID === 0}
           >
             Add
           </button>
         </div>
+        {listID === 0 ?
+          <l className="red">please enter and select the list name!</l> : null
+        }
       </fieldset>
+
+      <FilterList filter={filter} changeFilter={changeFilter}/>
+
     </form>
   )
 }

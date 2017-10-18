@@ -31,7 +31,7 @@ export function* addTodo () {
     if (action.meta && action.meta.type === 'todos') {
       const todo = {
         ...action.payload,
-        listID: 1 // Change this to support multiple lists
+        listID: action.payload.listID // Change this to support multiple lists
       }
 
       const response = yield call(api.post, '/todos', {...todo})

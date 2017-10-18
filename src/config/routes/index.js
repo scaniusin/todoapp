@@ -12,8 +12,9 @@ import App from 'App'
 // chunking assets. Check out the following for more:
 // https://gist.github.com/sokra/27b24881210b56bbaff7#code-splitting-with-es6
 
-const Todos = (nextState, cb) => {
-  System.import('App/screens/Todos')
+
+const Main = (nextState, cb) => {
+  System.import('App/screens/Main')
     .then(module => cb(null, module.default))
     .catch((e) => { throw e })
 }
@@ -22,15 +23,17 @@ const Todos = (nextState, cb) => {
 // https://github.com/reactjs/react-router/blob/master/docs/guides/DynamicRouting.md
 const routes = (
   <Route path='/' component={App}>
-    <IndexRoute getComponent={Todos} />
+    <IndexRoute getComponents={Main} />
   </Route>
+
+
 )
 
 // Unfortunately, HMR breaks when we dynamically resolve
 // routes so we need to require them here as a workaround.
 // https://github.com/gaearon/react-hot-loader/issues/288
 if (module.hot) {
-  require('App/screens/Todos')
+  require('App/screens/Main')
 }
 
 export default routes
